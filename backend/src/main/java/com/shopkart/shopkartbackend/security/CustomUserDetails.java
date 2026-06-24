@@ -1,8 +1,9 @@
-package com.nike.nikebackend.security;
+package com.shopkart.shopkartbackend.security;
 
-import com.nike.nikebackend.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.shopkart.shopkartbackend.model.User;
 
 import java.util.Collection;
 import java.util.Collections;

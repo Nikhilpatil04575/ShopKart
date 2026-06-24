@@ -1,15 +1,16 @@
-package com.nike.nikebackend.services;
+package com.shopkart.shopkartbackend.services;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nike.nikebackend.model.CartItem;
-import com.nike.nikebackend.model.Product;
-import com.nike.nikebackend.model.User;
-import com.nike.nikebackend.repository.CartItemRepository;
-import com.nike.nikebackend.repository.ProductRepository;
-import com.nike.nikebackend.repository.UserRepository;
+import com.shopkart.shopkartbackend.model.CartItem;
+import com.shopkart.shopkartbackend.model.Product;
+import com.shopkart.shopkartbackend.model.User;
+import com.shopkart.shopkartbackend.repository.CartItemRepository;
+import com.shopkart.shopkartbackend.repository.ProductRepository;
+import com.shopkart.shopkartbackend.repository.UserRepository;
 
 @Service
 public class CartService {

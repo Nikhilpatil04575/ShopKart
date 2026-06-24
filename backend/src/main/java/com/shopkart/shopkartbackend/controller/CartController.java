@@ -1,4 +1,4 @@
-package com.nike.nikebackend.controller;
+package com.shopkart.shopkartbackend.controller;
 
 import java.util.Map;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nike.nikebackend.security.JwtUtil;
-import com.nike.nikebackend.services.CartService;
+import com.shopkart.shopkartbackend.security.JwtUtil;
+import com.shopkart.shopkartbackend.services.CartService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
