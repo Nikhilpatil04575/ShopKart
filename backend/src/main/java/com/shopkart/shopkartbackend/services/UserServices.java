@@ -1,11 +1,11 @@
-package com.nike.nikebackend.services;
+package com.shopkart.shopkartbackend.services;
 
-import com.nike.nikebackend.model.User;
-import com.nike.nikebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.shopkart.shopkartbackend.model.User;
+import com.shopkart.shopkartbackend.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -16,13 +16,14 @@ public class UserServices {
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServices(UserRepository userRepo,@Lazy  PasswordEncoder passwordEncoder) {
+    public UserServices(UserRepository userRepo, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
 
     public User createUser(User user) {
-        if (userRepo.findByEmail(user.getEmail()).isPresent()) return null;
+        if (userRepo.findByEmail(user.getEmail()).isPresent())
+            return null;
         System.out.println("DEBUG Email: " + user.getEmail());
         System.out.println("DEBUG Password: " + user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -36,7 +37,7 @@ public class UserServices {
     public User findByEmail(String email) {
         return userRepo.findByEmail(email).orElse(null);
     }
-    
+
     public boolean checkPassword(String rawPassword, String encodedPasswordFromDB) {
         return passwordEncoder.matches(rawPassword, encodedPasswordFromDB);
     }

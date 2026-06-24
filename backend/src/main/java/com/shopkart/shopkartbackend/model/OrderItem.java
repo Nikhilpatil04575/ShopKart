@@ -1,4 +1,4 @@
-package com.nike.nikebackend.model;
+package com.shopkart.shopkartbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;

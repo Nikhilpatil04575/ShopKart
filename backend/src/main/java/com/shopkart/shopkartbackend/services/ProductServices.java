@@ -1,4 +1,4 @@
-package com.nike.nikebackend.services;
+package com.shopkart.shopkartbackend.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,18 +6,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.nike.nikebackend.model.Product;
-import com.nike.nikebackend.repository.ProductRepository;
+import com.shopkart.shopkartbackend.model.Product;
+import com.shopkart.shopkartbackend.repository.ProductRepository;
 
 @Service
 public class ProductServices {
 	@Autowired
 	ProductRepository productRepository;
-	
+
 	public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-	
+		return productRepository.findAll();
+	}
+
 	public Optional<Product> findById(Long id) {
 		return productRepository.findById(id);
 	}

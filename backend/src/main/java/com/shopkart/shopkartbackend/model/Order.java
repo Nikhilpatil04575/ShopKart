@@ -1,4 +1,4 @@
-package com.nike.nikebackend.model;
+package com.shopkart.shopkartbackend.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "orders")

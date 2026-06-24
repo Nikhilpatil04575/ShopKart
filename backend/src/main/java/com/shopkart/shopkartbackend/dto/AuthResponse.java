@@ -1,4 +1,4 @@
-package com.nike.nikebackend.dto;
+package com.shopkart.shopkartbackend.dto;
 
 public class AuthResponse {
     private String token;

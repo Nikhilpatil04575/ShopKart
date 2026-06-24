@@ -1,4 +1,4 @@
-package com.nike.nikebackend.security;
+package com.shopkart.shopkartbackend.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -12,7 +12,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final String SECRET_KEY = "your_super_secret_key_which_is_very_secure_12345"; // 256-bit key (at least 32 chars)
+    private final String SECRET_KEY = "your_super_secret_key_which_is_very_secure_12345"; // 256-bit key (at least 32
+                                                                                          // chars)
 
     private final long EXPIRATION_TIME = 86400000; // 1 day in ms
 

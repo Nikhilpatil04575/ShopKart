@@ -1,4 +1,4 @@
-package com.nike.nikebackend.security;
+package com.shopkart.shopkartbackend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,14 +36,14 @@ public class SecurityConfig {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(// The `passwordEncoder` method in the `SecurityConfig` class is a
-        // bean that creates and returns an instance of
-        // `BCryptPasswordEncoder`. This `BCryptPasswordEncoder` is used
-        // for encoding passwords before storing them in the database or
-        // comparing them during authentication processes. It helps to
-        // securely hash passwords using the bcrypt hashing algorithm,
-        // which is a widely recommended approach for password security in
-        // Java applications.
-        passwordEncoder());
+                // bean that creates and returns an instance of
+                // `BCryptPasswordEncoder`. This `BCryptPasswordEncoder` is used
+                // for encoding passwords before storing them in the database or
+                // comparing them during authentication processes. It helps to
+                // securely hash passwords using the bcrypt hashing algorithm,
+                // which is a widely recommended approach for password security in
+                // Java applications.
+                passwordEncoder());
         return provider;
     }
 
@@ -55,19 +55,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ No session
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // For CORS preflight
-                .requestMatchers(
-                        "/api/auth/**",
-                        "/users/**",
-                             // ✅ Allow registration
-                        "/api/cart/add"       // Your existing one
-                    ).permitAll()       
-                .anyRequest().authenticated()
-            )
-            .cors(); // Enable CORS
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // ✅ No
+                                                                                                              // session
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // For CORS preflight
+                        .requestMatchers(
+                                "/api/auth/**",
+                                "/users/**",
+                                // ✅ Allow registration
+                                "/api/cart/add" // Your existing one
+                        ).permitAll()
+                        .anyRequest().authenticated())
+                .cors(); // Enable CORS
 
         // ✅ Register JwtFilter BEFORE UsernamePasswordAuthenticationFilter
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

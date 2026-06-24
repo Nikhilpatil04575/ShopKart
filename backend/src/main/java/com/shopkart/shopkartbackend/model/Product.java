@@ -1,4 +1,4 @@
-package com.nike.nikebackend.model;
+package com.shopkart.shopkartbackend.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Product {
 
     private String title;
 
-    @Column(name = "`desc`") 
+    @Column(name = "`desc`")
     private String desc;
 
     private int quantity;
@@ -34,12 +34,10 @@ public class Product {
     private double price;
 
     private String category;
-    
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<CartItem> cartItems = new ArrayList<>();
-
 
     // ✅ Constructors
     public Product() {
@@ -53,17 +51,16 @@ public class Product {
         this.price = price;
         this.category = category;
     }
-    
 
     public List<CartItem> getCartItems() {
-		return cartItems;
-	}
+        return cartItems;
+    }
 
-	public void setCartItems(List<CartItem> cartItems) {
-		this.cartItems = cartItems;
-	}
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 
-	// ✅ Getters and Setters
+    // ✅ Getters and Setters
     public Long getId() {
         return id;
     }
@@ -120,4 +117,3 @@ public class Product {
         this.category = category;
     }
 }
-

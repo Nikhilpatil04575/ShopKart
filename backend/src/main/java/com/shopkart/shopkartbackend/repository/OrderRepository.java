@@ -1,8 +1,9 @@
-package com.nike.nikebackend.repository;
+package com.shopkart.shopkartbackend.repository;
 
-import com.nike.nikebackend.model.Order;
-import com.nike.nikebackend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.shopkart.shopkartbackend.model.Order;
+import com.shopkart.shopkartbackend.model.User;
 
 import java.util.List;
 

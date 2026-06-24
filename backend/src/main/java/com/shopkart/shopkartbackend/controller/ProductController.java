@@ -1,4 +1,4 @@
-package com.nike.nikebackend.controller;
+package com.shopkart.shopkartbackend.controller;
 
 import java.util.List;
 
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping; // ✅ You missed thi
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nike.nikebackend.model.Product;
-import com.nike.nikebackend.services.ProductServices;
+import com.shopkart.shopkartbackend.model.Product;
+import com.shopkart.shopkartbackend.services.ProductServices;
 
 @RestController
 @CrossOrigin("http://localhost:5173")
-@RequestMapping("/api/products")       // Base URL for this controller: /api/products
+@RequestMapping("/api/products") // Base URL for this controller: /api/products
 public class ProductController {
 
     @Autowired
     private ProductServices productServices;
 
-    @GetMapping               
+    @GetMapping
     public List<Product> getAllProducts() {
         return productServices.getAllProducts();
     }

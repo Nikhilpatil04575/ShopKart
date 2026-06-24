@@ -1,10 +1,10 @@
-package com.nike.nikebackend;
+package com.shopkart.shopkartbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NikebackendApplicationTests {
+class ShopkartBackendApplicationTests {
 
 	@Test
 	void contextLoads() {

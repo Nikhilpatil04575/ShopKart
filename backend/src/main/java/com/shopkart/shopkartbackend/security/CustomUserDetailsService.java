@@ -1,10 +1,11 @@
-package com.nike.nikebackend.security;
+package com.shopkart.shopkartbackend.security;
 
-import com.nike.nikebackend.model.User;
-import com.nike.nikebackend.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
+
+import com.shopkart.shopkartbackend.model.User;
+import com.shopkart.shopkartbackend.services.UserServices;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -14,7 +15,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userServices.findByEmail(email);  // This method must exist in UserServices
+        User user = userServices.findByEmail(email); // This method must exist in UserServices
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + email);
         }

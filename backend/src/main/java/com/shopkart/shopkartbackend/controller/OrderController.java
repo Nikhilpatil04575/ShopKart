@@ -1,13 +1,14 @@
-package com.nike.nikebackend.controller;
+package com.shopkart.shopkartbackend.controller;
 
-import com.nike.nikebackend.model.Order;
-import com.nike.nikebackend.security.JwtUtil;
-import com.nike.nikebackend.services.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.shopkart.shopkartbackend.model.Order;
+import com.shopkart.shopkartbackend.security.JwtUtil;
+import com.shopkart.shopkartbackend.services.OrderService;
 
 import java.util.List;
 import java.util.Map;
@@ -83,7 +84,7 @@ public class OrderController {
     // API 4: Place Cash on Delivery order
     @PostMapping("/place-cod-order")
     public ResponseEntity<?> placeCodOrder(@RequestBody Map<String, Object> data,
-                                            HttpServletRequest request) {
+            HttpServletRequest request) {
         try {
             String email = extractEmail(request);
             String address = data.get("address").toString();

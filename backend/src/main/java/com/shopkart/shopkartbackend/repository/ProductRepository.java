@@ -1,9 +1,9 @@
-package com.nike.nikebackend.repository;
+package com.shopkart.shopkartbackend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.nike.nikebackend.model.Product;
+import com.shopkart.shopkartbackend.model.Product;
 
-public interface ProductRepository extends JpaRepository<Product, Long>{
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
 }

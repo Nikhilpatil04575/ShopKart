@@ -1,12 +1,13 @@
-package com.nike.nikebackend.controller;
+package com.shopkart.shopkartbackend.controller;
 
-import com.nike.nikebackend.model.User;
-import com.nike.nikebackend.security.JwtUtil;
-import com.nike.nikebackend.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import com.shopkart.shopkartbackend.model.User;
+import com.shopkart.shopkartbackend.security.JwtUtil;
+import com.shopkart.shopkartbackend.services.UserServices;
 
 import java.util.Map;
 
@@ -57,7 +58,6 @@ public class UserController {
 
         return ResponseEntity.ok(Map.of(
                 "token", token,
-                "user", user
-        ));
+                "user", user));
     }
 }

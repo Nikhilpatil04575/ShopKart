@@ -1,7 +1,8 @@
-package com.nike.nikebackend.repository;
+package com.shopkart.shopkartbackend.repository;
 
-import com.nike.nikebackend.model.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.shopkart.shopkartbackend.model.OrderItem;
 
 public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 }

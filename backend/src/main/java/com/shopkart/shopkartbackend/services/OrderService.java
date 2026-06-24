@@ -1,15 +1,16 @@
-package com.nike.nikebackend.services;
+package com.shopkart.shopkartbackend.services;
 
-import com.nike.nikebackend.model.Order;
-import com.nike.nikebackend.model.OrderItem;
-import com.nike.nikebackend.model.Product;
-import com.nike.nikebackend.model.User;
-import com.nike.nikebackend.repository.OrderItemRepository;
-import com.nike.nikebackend.repository.OrderRepository;
-import com.nike.nikebackend.repository.ProductRepository;
-import com.nike.nikebackend.repository.UserRepository;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
+import com.shopkart.shopkartbackend.model.Order;
+import com.shopkart.shopkartbackend.model.OrderItem;
+import com.shopkart.shopkartbackend.model.Product;
+import com.shopkart.shopkartbackend.model.User;
+import com.shopkart.shopkartbackend.repository.OrderItemRepository;
+import com.shopkart.shopkartbackend.repository.OrderRepository;
+import com.shopkart.shopkartbackend.repository.ProductRepository;
+import com.shopkart.shopkartbackend.repository.UserRepository;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -109,7 +110,7 @@ public class OrderService {
 
     // Save Cash on Delivery order
     public Order saveCodOrder(String email, String address, double totalAmount,
-                               List<Map<String, Object>> cartItems) {
+            List<Map<String, Object>> cartItems) {
         User user = userRepo.findByEmail(email).orElseThrow();
 
         Order order = new Order();
@@ -117,7 +118,7 @@ public class OrderService {
         order.setAddress(address);
         order.setTotalAmount(totalAmount);
         order.setOrderDate(LocalDateTime.now());
-        order.setStatus("PENDING");         // Not yet paid
+        order.setStatus("PENDING"); // Not yet paid
         order.setPaymentMethod("Cash on Delivery");
         Order savedOrder = orderRepo.save(order);
 
