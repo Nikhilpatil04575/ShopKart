@@ -55,16 +55,7 @@ const Navigation = () => {
 					</Link>
 				</li>
 
-				{isLoggedIn && (
-					<li>
-						<Link
-							to="/cart"
-							className={location.pathname === "/cart" ? "active-link" : ""}
-						>
-							Cart
-						</Link>
-					</li>
-				)}
+
 
 				{/* ✅ Show Order History only if logged in */}
 				{isLoggedIn && (
@@ -89,6 +80,12 @@ const Navigation = () => {
 						className={isLoginPage ? "hidden-link" : "login-btn"}
 					>
 						Sign in
+					</Link>
+				)}
+
+				{isLoggedIn && (
+					<Link to="/cart" className="cart-icon-btn" title="Cart">
+						🛒
 					</Link>
 				)}
 

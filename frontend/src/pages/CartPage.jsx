@@ -105,7 +105,7 @@ const CartPage = () => {
 										<p>Quantity: {item.quantity}</p>
 										<p>Price: ₹{item.product.price * item.quantity}</p>
 									</div>
-									<button onClick={() => removeItem(item.product.id)}>
+									<button class="clear-btn" onClick={() => removeItem(item.product.id)}>
 										Remove
 									</button>
 								</div>
@@ -117,7 +117,7 @@ const CartPage = () => {
 								Clear Cart
 							</button>
 							<button
-								className="clear-btn"
+								className="placed-btn"
 								onClick={() => setIsModalOpen(true)}
 							>
 								Place Order
