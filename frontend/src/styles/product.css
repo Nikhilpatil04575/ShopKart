@@ -1,0 +1,53 @@
+/* Product page — styles shared with HeroSection product grid in App.css */
+
+.product-container {
+  padding: 40px 40px 80px;
+  background-color: #fafafa;
+}
+
+.product-container > h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.product-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #111;
+}
+
+.product-header p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  color: #6b6b6b;
+}
+
+/* product-grid and product-card are defined in App.css globally */
+
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 18px;
+  color: #6b6b6b;
+}
+
+.loading-state::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #d01c28;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-left: 12px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

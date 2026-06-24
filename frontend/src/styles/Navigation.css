@@ -1,0 +1,5 @@
+/* Navigation CSS - all global nav styles are now in App.css */
+/* This file keeps any nav-specific overrides */
+
+/* Nav is now sticky with shadow from App.css */
+/* The logo height and active-link are all managed there */

@@ -1,0 +1,114 @@
+/* Login page - uses Poppins from global App.css */
+
+.login-page {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff 60%);
+  padding: 40px 16px;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.10);
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.login-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.login-card h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  color: #6b6b6b;
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  color: #111;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  background: #fafafa;
+}
+
+.input-group input:focus {
+  border-color: #d01c28;
+  box-shadow: 0 0 0 3px rgba(208, 28, 40, 0.10);
+  background: #fff;
+}
+
+.login-submit-btn {
+  width: 100%;
+  background-color: #d01c28;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(208, 28, 40, 0.3);
+}
+
+.login-submit-btn:hover {
+  background-color: #a9141f;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(208, 28, 40, 0.4);
+}
+
+.login-footer {
+  margin-top: 24px;
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.register-link {
+  color: #d01c28;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 20px;
+  }
+}
