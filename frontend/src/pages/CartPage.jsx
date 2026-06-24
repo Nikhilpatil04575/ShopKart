@@ -76,14 +76,95 @@ const CartPage = () => {
 	};
 
 	const handleOrder = async (orderDetails) => {
-		try {
-			toast.success("Order placed successfully!");
-			clearCart();
-		} catch (error) {
-			toast.error("Failed to place order");
+		const token = localStorage.getItem("token");
+
+		if (orderDetails.paymentMethod === "Cash on Delivery") {
+			try {
+				const cartItemsPayload = cartItems.map((item) => ({
+					productId: item.product.id,
+					quantity: item.quantity,
+					price: item.product.price,
+				}));
+				await axios.post(
+					"http://localhost:8080/api/orders/place-cod-order",
+					{
+						address: orderDetails.address,
+						amount: totalSum,
+						cartItems: cartItemsPayload,
+					},
+					{ headers: { Authorization: `Bearer ${token}` } }
+				);
+				toast.success("🚚 Order placed! Pay on delivery.");
+				clearCart();
+			} catch (err) {
+				toast.error("Failed to place COD order.");
+			}
+			return;
 		}
-		console.log("Order Details:", orderDetails);
+
+		try {
+			// Step 1: Create Razorpay order on backend
+			const res = await axios.post(
+				"http://localhost:8080/api/orders/create-razorpay-order",
+				{ amount: totalSum },
+				{ headers: { Authorization: `Bearer ${token}` } }
+			);
+
+			const { razorpayOrderId, amount, currency, keyId } = res.data;
+
+			// Step 2: Open Razorpay popup
+			const options = {
+				key: keyId,
+				amount: amount,
+				currency: currency,
+				name: "Nike Store",
+				description: "Order Payment",
+				order_id: razorpayOrderId,
+				handler: async function (response) {
+					// Step 3: Verify + save order with product details
+					try {
+						// Build cartItems array to send to backend
+						const cartItemsPayload = cartItems.map((item) => ({
+							productId: item.product.id,
+							quantity: item.quantity,
+							price: item.product.price,
+						}));
+
+						await axios.post(
+							"http://localhost:8080/api/orders/verify-payment",
+							{
+								razorpayOrderId: razorpayOrderId,
+								razorpayPaymentId: response.razorpay_payment_id,
+								razorpaySignature: response.razorpay_signature,
+								address: orderDetails.address,
+								amount: totalSum,
+								cartItems: cartItemsPayload,   // ← product + qty info
+							},
+							{ headers: { Authorization: `Bearer ${token}` } }
+						);
+						toast.success("🎉 Payment successful! Order placed.");
+						clearCart();
+					} catch (err) {
+						toast.error("Payment verification failed.");
+					}
+				},
+				prefill: {
+					name: "Customer",
+					email: localStorage.getItem("email") || "",
+				},
+				theme: { color: "#000000" },
+			};
+
+			const rzp = new window.Razorpay(options);
+			rzp.on("payment.failed", function () {
+				toast.error("Payment failed. Please try again.");
+			});
+			rzp.open();
+		} catch (error) {
+			toast.error("Could not initiate payment.");
+		}
 	};
+
 
 	return (
 		<>
@@ -131,7 +212,9 @@ const CartPage = () => {
 				isOpen={isModalOpen}
 				onClose={() => setIsModalOpen(false)}
 				onSubmit={handleOrder}
+				totalAmount={totalSum}
 			/>
+
 		</>
 	);
 };

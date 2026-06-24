@@ -1,25 +1,30 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { cancelOrder } from "../store/CartSlice";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "../styles/orderHistory.css";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-const OrderHistory = () => {
-  const dispatch = useDispatch();
-  const orders = useSelector((state) => state.cart.orders.history);
 
-  const handleCancelOrder = (index) => {
-    dispatch(cancelOrder(index));
-    toast.success(`Order Cancel`, {
-      position: "top-right",
-      autoClose: 2000, // Disappears after 2 seconds
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+const OrderHistory = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get("http://localhost:8080/api/orders/history", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setOrders(res.data);
+      } catch (err) {
+        toast.error("Failed to load order history.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrders();
+  }, []);
+
+  if (loading) return <div className="order-history-container"><p>Loading orders...</p></div>;
 
   return (
     <div className="order-history-container">
@@ -28,24 +33,43 @@ const OrderHistory = () => {
         <p>No orders found!</p>
       ) : (
         <div className="order-list">
-          {orders.map((order, index) => (
-            <div key={index} className="order-card">
-              <h3>Order #{index + 1}</h3>
-              <p>Date: {order.date}</p>
-              <ul>
-                {order.items.map((item) => (
-                  <li key={item.id}>
-                    {item.title} - Quantity: {item.quantity} - ₹{item.price * item.quantity}
-                  </li>
+          {orders.map((order) => (
+            <div key={order.id} className="order-card">
+              <h3>Order #{order.id}</h3>
+              <p>📅 {new Date(order.orderDate).toLocaleDateString("en-IN")}</p>
+              <p>📍 {order.address}</p>
+              <p>💳 {order.paymentMethod}</p>
+              <p>
+                Payment Status:{" "}
+                <span style={{ color: order.status === "PAID" ? "green" : "orange" }}>
+                  {order.status}
+                </span>
+              </p>
+
+              {/* Show ordered products with images */}
+              <div className="order-items-list">
+                {order.orderItems?.map((item) => (
+                  <div key={item.id} className="order-item-row">
+                    <img
+                      src={item.product.img || "/images/placeholder.png"}
+                      alt={item.product.title}
+                      className="order-item-img"
+                    />
+                    <div className="order-item-details">
+                      <span className="order-item-title">{item.product.title}</span>
+                      <span className="order-item-qty">Qty: {item.quantity}</span>
+                      <span className="order-item-price">₹{item.priceAtPurchase * item.quantity}</span>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-              <h4>Total: ₹{order.total}</h4>
-              <button
-                className="cancel-order-btn"
-                onClick={() => handleCancelOrder(index)}
-              >
-                Cancel Order
-              </button>
+              </div>
+
+              <h4>💰 Total: ₹{order.totalAmount}</h4>
+              {order.razorpayPaymentId && (
+                <p style={{ fontSize: "12px", color: "#aaa" }}>
+                  Payment ID: {order.razorpayPaymentId}
+                </p>
+              )}
             </div>
           ))}
         </div>

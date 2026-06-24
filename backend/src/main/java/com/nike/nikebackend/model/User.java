@@ -2,9 +2,9 @@ package com.nike.nikebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
-import lombok.Data;
+
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -14,20 +14,20 @@ import java.util.List;
 @NoArgsConstructor
 public class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String name;
-    private String mobile;
-    private String email;
+	private String name;
+	private String mobile;
+	private String email;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)// 👈 hide password in API response
-    private String password;
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // 👈 hide password in API response
+	private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // 👈 pair with JsonBackReference
-    private List<CartItem> cartItems = new ArrayList<>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonManagedReference // 👈 pair with JsonBackReference
+	private List<CartItem> cartItems = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -76,8 +76,5 @@ public class User {
 	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
 	}
-    
-    
-    
-}
 
+}

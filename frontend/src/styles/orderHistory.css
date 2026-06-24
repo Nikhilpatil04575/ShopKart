@@ -50,3 +50,53 @@
 .cancel-order-btn:hover {
   background-color: #c92b3f;
 }
+
+/* Order item rows with product image */
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #eee;
+}
+
+.order-item-img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #eee;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.order-item-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #222;
+}
+
+.order-item-qty {
+  font-size: 13px;
+  color: #666;
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: bold;
+  color: #111;
+}
