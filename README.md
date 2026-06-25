@@ -334,9 +334,7 @@ order_items    → id, order_id (FK), product_id (FK), quantity, price
 
 ---
 
-## 📄 License
 
-This project is licensed under the **MIT License**.
 
 ---
 
