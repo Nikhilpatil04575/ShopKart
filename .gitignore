@@ -1,42 +1,29 @@
 # ===========================
-# BACKEND (Spring Boot / Maven)
+# PROJECT-WIDE RULES
+# (backend/ and frontend/ each have their own .gitignore)
 # ===========================
-nikebackend/target/
-nikebackend/.mvn/wrapper/maven-wrapper.jar
-nikebackend/.classpath
-nikebackend/.project
-nikebackend/.settings/
-nikebackend/.metadata/
-nikebackend/.springBeans
-nikebackend/.sts4-cache
-nikebackend/.apt_generated
-nikebackend/.factorypath
-nikebackend/build/
-nikebackend/.vs/
 
-# Sensitive config — copy from application.properties.example and fill in your values
-nikebackend/src/main/resources/application.properties
-
-# ===========================
-# FRONTEND (Vite + React)
-# ===========================
-Project1/Project1/node_modules/
-Project1/Project1/dist/
-Project1/Project1/dist-ssr/
-Project1/Project1/*.local
-
-# ===========================
-# COMMON
-# ===========================
-.vscode/
+# OS & Editor artifacts
+.DS_Store
 .idea/
+.vscode/
+*.suo
 *.iws
 *.iml
 *.ipr
-.DS_Store
-*.suo
+
+# Logs
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Eclipse / Spring Tool Suite metadata at the root level
 /.metadata/
+
+# ===========================
+# SENSITIVE CONFIG (root-level reminder)
+# ===========================
+# backend/src/main/resources/application.properties is already
+# excluded by backend/.gitignore — listed here as a safety net.
+backend/src/main/resources/application.properties

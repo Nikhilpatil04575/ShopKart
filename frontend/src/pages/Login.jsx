@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -15,7 +17,7 @@ const Login = () => {
 
 		try {
 			const response = await axios.post(
-				"http://localhost:8080/api/auth/login",
+				`${BASE_URL}/api/auth/login`,
 				{
 					email,
 					password,

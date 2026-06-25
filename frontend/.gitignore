@@ -1,6 +1,10 @@
 # Logs
 logs
 *.log
+
+# Environment variables (never commit real .env)
+.env
+# .env.example is safe to commit — it only has placeholders
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

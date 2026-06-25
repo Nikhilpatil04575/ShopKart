@@ -7,7 +7,6 @@ const Navigation = () => {
 	const isLoginPage = location.pathname === "/login";
 
 	const isLoggedIn = localStorage.getItem("token") !== null;
-	console.log("isLoggedIn:", isLoggedIn);
 
 	const handleLogout = () => {
 		localStorage.removeItem("token");

@@ -24,8 +24,6 @@ public class UserServices {
     public User createUser(User user) {
         if (userRepo.findByEmail(user.getEmail()).isPresent())
             return null;
-        System.out.println("DEBUG Email: " + user.getEmail());
-        System.out.println("DEBUG Password: " + user.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepo.save(user);
     }

@@ -3,6 +3,8 @@ import axios from "axios";
 import "../styles/orderHistory.css";
 import { toast } from "react-toastify";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const OrderHistory = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +13,7 @@ const OrderHistory = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8080/api/orders/history", {
+        const res = await axios.get(`${BASE_URL}/api/orders/history`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setOrders(res.data);

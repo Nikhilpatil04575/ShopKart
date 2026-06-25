@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import OrderDetailsModal from "../components/OrderDetailsModal";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const CartPage = () => {
 	const [cartItems, setCartItems] = useState([]);
 	const [totalSum, setTotalSum] = useState(0);
@@ -18,12 +20,12 @@ const CartPage = () => {
 				return;
 			}
 
-			const res = await axios.get("http://localhost:8080/api/cart", {
+			const res = await axios.get(`${BASE_URL}/api/cart`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
 			});
-			console.log("Cart Items:", res.data);
+
 			setCartItems(Array.isArray(res.data) ? res.data : []);
 		} catch (error) {
 			console.error("Failed to fetch cart", error);
@@ -46,7 +48,7 @@ const CartPage = () => {
 	const removeItem = async (id) => {
 		try {
 			const token = localStorage.getItem("token");
-			await axios.delete(`http://localhost:8080/api/cart/remove/${id}`, {
+			await axios.delete(`${BASE_URL}/api/cart/remove/${id}`, {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
@@ -61,9 +63,9 @@ const CartPage = () => {
 		try {
 			const token = localStorage.getItem("token");
 			const ids = cartItems.map((item) => item.product.id);
-			console.log(ids);
+
 			for (let id of ids) {
-				await axios.delete(`http://localhost:8080/api/cart/remove/${id}`, {
+				await axios.delete(`${BASE_URL}/api/cart/remove/${id}`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -86,7 +88,7 @@ const CartPage = () => {
 					price: item.product.price,
 				}));
 				await axios.post(
-					"http://localhost:8080/api/orders/place-cod-order",
+					`${BASE_URL}/api/orders/place-cod-order`,
 					{
 						address: orderDetails.address,
 						amount: totalSum,
@@ -105,7 +107,7 @@ const CartPage = () => {
 		try {
 			// Step 1: Create Razorpay order on backend
 			const res = await axios.post(
-				"http://localhost:8080/api/orders/create-razorpay-order",
+				`${BASE_URL}/api/orders/create-razorpay-order`,
 				{ amount: totalSum },
 				{ headers: { Authorization: `Bearer ${token}` } }
 			);
@@ -131,7 +133,7 @@ const CartPage = () => {
 						}));
 
 						await axios.post(
-							"http://localhost:8080/api/orders/verify-payment",
+							`${BASE_URL}/api/orders/verify-payment`,
 							{
 								razorpayOrderId: razorpayOrderId,
 								razorpayPaymentId: response.razorpay_payment_id,

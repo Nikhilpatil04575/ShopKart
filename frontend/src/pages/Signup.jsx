@@ -4,6 +4,8 @@ import "../styles/signup.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const Signup = () => {
 	const navigate = useNavigate();
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,9 +31,7 @@ const Signup = () => {
 		}
 
 		try {
-			const response = await axios.post("http://localhost:8080/users", user);
-
-			console.log("Response from backend:", response.data);
+			const response = await axios.post(`${BASE_URL}/users`, user);
 			toast.success(`${name} Registered Suceesfully`, {
 				position: "top-right",
 				autoClose: 2000, // Disappears after 2 seconds

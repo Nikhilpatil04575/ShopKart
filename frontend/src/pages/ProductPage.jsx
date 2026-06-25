@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/product.css";
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const ProductPage = () => {
 	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(true);
@@ -16,13 +18,12 @@ const ProductPage = () => {
 			const token = localStorage.getItem("token");
 
 			if (!token) {
-				console.warn("No token found. Redirecting to login.");
 				window.location.href = "/login";
 				return;
 			}
 
 			try {
-				const response = await axios.get("http://localhost:8080/api/products", {
+				const response = await axios.get(`${BASE_URL}/api/products`, {
 					headers: {
 						Authorization: `Bearer ${token}`,
 					},
@@ -43,11 +44,9 @@ const ProductPage = () => {
 
 	const handleAddToCart = async (item) => {
 		dispatch(addToCart(item));
-		console.log("Item added to cart:", item);
-		console.log(item.id, item.title, item.price);
 		try {
 			await axios.post(
-				"http://localhost:8080/api/cart/add",
+				`${BASE_URL}/api/cart/add`,
 				{
 					productId: item.id,
 					quantity: 1,
